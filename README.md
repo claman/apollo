@@ -1,4 +1,4 @@
-# Percival (Percry for short)
+## Percival (Percy for short)
 
 Percival is a quick and dirty little script I've hacked together to search through a Markdown list of books.
 
@@ -12,8 +12,8 @@ Given a markdown table formatted thusly:
 
 You can search by author, publication date, title, and the year in which you read the book:
 
-  - -h, --help  show this help message and exit
-  - -a AUTHOR, --author AUTHOR  Search by author
-  - -p PUBLISHED, --published PUBLISHED  Search by publication date
-  - -t TITLE, --title TITLE  Search by title
-  - -y YEAR, --year YEAR  Search by reading year
+  - -h, --help (show this help message and exit)
+  - -a AUTHOR, --author AUTHOR (Search by author)
+  - -p PUBLISHED, --published PUBLISHED (Search by publication date)
+  - -t TITLE, --title TITLE (Search by title)
+  - -y YEAR, --year YEAR (Search by reading year)
