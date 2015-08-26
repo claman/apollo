@@ -57,7 +57,7 @@ parser.add_argument('-a', '--author', help='Search by author')
 parser.add_argument('-p', '--published', help='Search by publication date')
 parser.add_argument('-t', '--title', help='Search by title')
 parser.add_argument('-y', '--year', help='Search by reading year')
-parser.add_argument('--stats', help='Get stats')
+parser.add_argument('--stats', action='store_true')
 args = parser.parse_args()
 if args.title:
   search('t', args.title)
@@ -67,6 +67,8 @@ elif args.author:
   search('a', args.author)
 elif args.published:
   search('p', args.published)
+elif args.stats:
+  stats()
 else:
   print 'Try running again with \'-h\' or \'--help\''
 
