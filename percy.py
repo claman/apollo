@@ -49,7 +49,7 @@ def stats():
     elif format == 'Ebook':
       totalEbooks += 1
   print 'You have ' + str(totalBooks) + ' books on your list.'
-  print str(totalPhysical) + ' of them are physical (paperback or hardcover.'
+  print str(totalPhysical) + ' of them are physical (paperback or hardcover).'
   print str(totalEbooks) + ' of them are ebooks.'
 
 parser = argparse.ArgumentParser()
