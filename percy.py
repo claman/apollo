@@ -34,12 +34,30 @@ def search(option, search):
     elif option == 'p':
       if search == date:
 	info(title, author, owned, start, end, format, date)
+def stats():
+  totalBooks = 0
+  totalPhysical = 0
+  totalEbooks = 0
+  for line in file:
+    line = line.strip('|\n')
+    entry = line.split('|')
+    title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
+    if title != 'Title' and title != ':----' and title != '~':
+      totalBooks += 1
+    if format == 'Paperback' or format == 'Hardcover':
+      totalPhysical += 1
+    elif format == 'Ebook':
+      totalEbooks += 1
+  print 'You have ' + str(totalBooks) + ' books on your list.'
+  print str(totalPhysical) + ' of them are physical (paperback or hardcover.'
+  print str(totalEbooks) + ' of them are ebooks.'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', '--author', help='Search by author')
 parser.add_argument('-p', '--published', help='Search by publication date')
 parser.add_argument('-t', '--title', help='Search by title')
 parser.add_argument('-y', '--year', help='Search by reading year')
+parser.add_argument('--stats', help='Get stats')
 args = parser.parse_args()
 if args.title:
   search('t', args.title)
