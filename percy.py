@@ -23,7 +23,7 @@ def search(option, search):
       if search in title:
 	info(title, author, owned, start, end, format, date)
     elif option == 'y':
-      if title != 'Title' and title != ':----' and title != '~':
+      if title != 'Title' and title != ':----':
 	if start and end != '-':
           if search == getYear(start) or search == getYear(end):
             info(title, author, owned, start, end, format, date)
@@ -42,7 +42,7 @@ def stats():
     line = line.strip('|\n')
     entry = line.split('|')
     title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
-    if title != 'Title' and title != ':----' and title != '~':
+    if title != 'Title' and title != ':----':
       totalBooks += 1
     if format == 'Paperback' or format == 'Hardcover':
       totalPhysical += 1
