@@ -53,10 +53,10 @@ def stats():
   print str(totalEbooks) + ' of them are ebooks.'
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-a', '--author', help='Search by author')
-parser.add_argument('-p', '--published', help='Search by publication date')
-parser.add_argument('-t', '--title', help='Search by title')
-parser.add_argument('-y', '--year', help='Search by reading year')
+parser.add_argument('-a', help='Search by author')
+parser.add_argument('-p', help='Search by publication date')
+parser.add_argument('-t', help='Search by title')
+parser.add_argument('-y', help='Search by reading year')
 parser.add_argument('--stats', action='store_true')
 args = parser.parse_args()
 if args.title:
@@ -70,6 +70,6 @@ elif args.published:
 elif args.stats:
   stats()
 else:
-  print 'Try running again with \'-h\' or \'--help\''
+  print 'Try running again with \'-h\''
 
 file.close()
