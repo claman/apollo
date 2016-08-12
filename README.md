@@ -1,6 +1,6 @@
 ## Percival (Percy for short)
 
-Percival is a quick and dirty little script I've hacked together to search through a Markdown list of books.
+Percival is a little script I've hacked together to search through a Markdown list of books.
 
 Given a markdown table formatted thusly:
 

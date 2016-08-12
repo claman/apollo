@@ -35,9 +35,8 @@ def search(option, search):
       if search == date:
         info(title, author, owned, start, end, format, date)
 def stats():
-  totalBooks = 0
-  totalPhysical = 0
-  totalEbooks = 0
+  totalBooks, totalPhysical, totalEbooks = 0, 0, 0
+  totalRead, totalOwned, totalBorrowed = 0, 0, 0
   for line in file:
     line = line.strip('|\n')
     entry = line.split('|')
@@ -48,11 +47,18 @@ def stats():
       totalPhysical += 1
     elif format == 'Ebook':
       totalEbooks += 1
-  print 'You have ' + str(totalBooks) + ' books on your list.'
-  print str(totalPhysical) + ' of them are physical (paperback or hardcover).'
-  print str(totalEbooks) + ' of them are ebooks.'
+    if owned == 'x':
+      totalOwned += 1
+    elif owned == 'o':
+      totalBorrowed += 1
+    if start != '-' and end != '-':
+      totalRead += 1
+  print 'You have ' + str(totalBooks) + ' books on your list; you have read ' + str(totalRead) + '.'
+  print 'You own ' + str(totalOwned) + ' books: ' + str(totalPhysical) \
+        + ' physical (paperback or hardcover) and ' + str(totalEbooks) + ' ebooks.'
+  print 'You have borrowed ' + str(totalBorrowed) + ' books.'
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description='List books based on queries.')
 parser.add_argument('-a', help='Search by author')
 parser.add_argument('-p', help='Search by publication date')
 parser.add_argument('-t', help='Search by title')
