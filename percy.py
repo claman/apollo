@@ -21,19 +21,19 @@ def search(option, search):
     title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
     if option == 't':
       if search in title:
-	info(title, author, owned, start, end, format, date)
+        info(title, author, owned, start, end, format, date)
     elif option == 'y':
       if title != 'Title' and title != ':----':
-	if start and end != '-':
+        if start and end != '-':
           if search == getYear(start) or search == getYear(end):
             info(title, author, owned, start, end, format, date)
     elif option == 'a':
       search = search.title()
       if search in author:
-	info(title, author, owned, start, end, format, date)
+        info(title, author, owned, start, end, format, date)
     elif option == 'p':
       if search == date:
-	info(title, author, owned, start, end, format, date)
+        info(title, author, owned, start, end, format, date)
 def stats():
   totalBooks = 0
   totalPhysical = 0
@@ -57,16 +57,16 @@ parser.add_argument('-a', help='Search by author')
 parser.add_argument('-p', help='Search by publication date')
 parser.add_argument('-t', help='Search by title')
 parser.add_argument('-y', help='Search by reading year')
-parser.add_argument('--stats', action='store_true')
+parser.add_argument('--stats', action='store_true', help='Show stats about list')
 args = parser.parse_args()
-if args.title:
-  search('t', args.title)
-elif args.year:
-  search('y', args.year)
-elif args.author:
-  search('a', args.author)
-elif args.published:
-  search('p', args.published)
+if args.t:
+  search('t', args.t)
+elif args.y:
+  search('y', args.y)
+elif args.a:
+  search('a', args.a)
+elif args.p:
+  search('p', args.p)
 elif args.stats:
   stats()
 else:
