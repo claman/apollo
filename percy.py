@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import argparse
+import datetime
 file = open('your filename here', 'r') # change this to correspond to your list
 
 def getYear(date):
