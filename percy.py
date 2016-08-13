@@ -21,6 +21,7 @@ def info(title, author, owned, start, end, format, date):
   print 'Finished: ' + end
   print 'Format: ' + format
   print 'First Published: ' + date
+  print 'You read this in ' + str(readTime(start, end)) + ' days.'
   print
 def search(option, search):
   file.next()
