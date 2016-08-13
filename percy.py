@@ -7,6 +7,13 @@ def getYear(date):
   slashDate = date.split('/')
   year = slashDate[2]
   return year
+def readTime(start, end):
+  start = start.split('/')
+  end = end.split('/')
+  startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
+  endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
+  readingTime = endDate - startDate
+  return readingTime.days
 def info(title, author, owned, start, end, format, date):
   print title + ' by ' + author
   print 'Owned: ' + owned
@@ -26,10 +33,9 @@ def search(option, search):
       if search in title:
         info(title, author, owned, start, end, format, date)
     elif option == 'y':
-      if title != 'Title' and title != ':----':
-        if start and end != '-':
-          if search == getYear(start) or search == getYear(end):
-            info(title, author, owned, start, end, format, date)
+      if start and end != '-':
+        if search == getYear(start) or search == getYear(end):
+          info(title, author, owned, start, end, format, date)
     elif option == 'a':
       search = search.title()
       if search in author:
