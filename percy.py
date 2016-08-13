@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import argparse
 import datetime
-file = open('your filename here', 'r') # change this to correspond to your list
+file = open('example.txt', 'r') # change this to correspond to your list
 
 def getYear(date):
   slashDate = date.split('/')
@@ -16,6 +16,8 @@ def info(title, author, owned, start, end, format, date):
   print 'First Published: ' + date
   print
 def search(option, search):
+  file.next()
+  file.next()
   for line in file:
     line = line.strip('|\n')
     entry = line.split('|')
