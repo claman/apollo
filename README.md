@@ -1,4 +1,4 @@
-## Percival (Percy for short)
+## Percival
 
 Percival is a little script I've hacked together to search through a Markdown list of books.
 
