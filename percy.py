@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import argparse
 import datetime
-file = open('example.txt', 'r') # change this to correspond to your list
+file = open('example.txt', 'r+') # change this to correspond to your list
 
 def getYear(date):
   slashDate = date.split('/')
