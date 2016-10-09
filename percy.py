@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import argparse
 import datetime
-file = open('example.txt', 'r+') # change this to correspond to your list
+file = open('example.txt', 'r') # change this to correspond to your list
 
 def getYear(date):
   slashDate = date.split('/')
@@ -47,12 +47,13 @@ def search(option, search):
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
   totalRead, totalOwned, totalBorrowed = 0, 0, 0
+  file.next()
+  file.next()
   for line in file:
     line = line.strip('|\n')
     entry = line.split('|')
     title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
-    if title != 'Title' and title != ':----':
-      totalBooks += 1
+    totalBooks += 1
     if format == 'Paperback' or format == 'Hardcover':
       totalPhysical += 1
     elif format == 'Ebook':
@@ -67,6 +68,18 @@ def stats():
   print 'You own ' + str(totalOwned) + ' books: ' + str(totalPhysical) \
         + ' physical (paperback or hardcover) and ' + str(totalEbooks) + ' ebooks.'
   print 'You have borrowed ' + str(totalBorrowed) + ' books.'
+def addBook():
+  append = open('example.txt', 'a') # change this to correspond to your list
+  title = raw_input('Title: ')
+  author = raw_input('Author: ')
+  owned = raw_input('Owned (x/o): ')
+  start = raw_input('Date Started (ie 2/7/2014): ')
+  end = raw_input('Date Finished (ie 2/10/2014): ')
+  b_format = raw_input('Format: ')
+  year = raw_input('Year of Publication: ')
+  append.write('\n|'+str(title)+'|'+str(author)+'|'+str(owned)+'|'+str(start)+'|'+str(end)+'|'+str(b_format)+'|'+str(year)+'|')
+  print 'Added '+str(title)+' by '+str(author)
+  append.close()
 
 parser = argparse.ArgumentParser(description='List books based on queries.')
 parser.add_argument('-a', help='Search by author')
@@ -74,6 +87,7 @@ parser.add_argument('-p', help='Search by publication date')
 parser.add_argument('-t', help='Search by title')
 parser.add_argument('-y', help='Search by reading year')
 parser.add_argument('--stats', action='store_true', help='Show stats about list')
+parser.add_argument('--add', action='store_true', help='Add book')
 args = parser.parse_args()
 if args.t:
   search('t', args.t)
@@ -85,6 +99,8 @@ elif args.p:
   search('p', args.p)
 elif args.stats:
   stats()
+elif args.add:
+  addBook()
 else:
   print 'Try running again with \'-h\''
 
