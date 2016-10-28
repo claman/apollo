@@ -14,7 +14,7 @@ def readTime(start, end):
   endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
   readingTime = endDate - startDate
   return readingTime.days
-def info(title, author, owned, start, end, format, date):
+def getInfo(title, author, owned, start, end, format, date):
   print title + ' by ' + author
   print 'Owned: ' + owned
   print 'Started: ' + start
@@ -32,18 +32,20 @@ def search(option, search):
     title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
     if option == 't':
       if search in title:
-        info(title, author, owned, start, end, format, date)
+        getInfo(title, author, owned, start, end, format, date)
     elif option == 'y':
       if start and end != '-':
         if search == getYear(start) or search == getYear(end):
-          info(title, author, owned, start, end, format, date)
+          getInfo(title, author, owned, start, end, format, date)
     elif option == 'a':
       search = search.title()
       if search in author:
-        info(title, author, owned, start, end, format, date)
+        getInfo(title, author, owned, start, end, format, date)
     elif option == 'p':
       if search == date:
-        info(title, author, owned, start, end, format, date)
+        getInfo(title, author, owned, start, end, format, date)
+    elif option == '--list':
+      getInfo(title, author, owned, start, end, format, date)
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
   totalRead, totalOwned, totalBorrowed = 0, 0, 0
@@ -102,6 +104,8 @@ elif args.stats:
   stats()
 elif args.add:
   addBook()
+elif args.list:
+  search('--list', '')
 else:
   print 'Try running again with \'-h\''
 
