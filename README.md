@@ -18,3 +18,4 @@ You can search by author, publication date, title, and the year in which you rea
   - -t TITLE, (Search by title)
   - -y YEAR, (Search by reading year)
   - --stats (Get stats)
+  - --list (List all books)
