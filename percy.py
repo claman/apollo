@@ -1,6 +1,7 @@
-#!/usr/bin/python
+#!/usr/local/bin/python2.7
 import argparse
 import datetime
+import yaml
 file = open('example.txt', 'r') # change this to correspond to your list
 
 def getYear(date):
@@ -8,12 +9,15 @@ def getYear(date):
   year = slashDate[2]
   return year
 def readTime(start, end):
-  start = start.split('/')
-  end = end.split('/')
-  startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
-  endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
-  readingTime = endDate - startDate
-  return readingTime.days
+  try:
+    start = start.split('/')
+    end = end.split('/')
+    startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
+    endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
+    readingTime = endDate - startDate
+    return 'You read this in ' + str(readingTime.days) + ' days.'
+  except IndexError:
+    return 'You are currently reading this.'
 def getInfo(title, author, owned, start, end, format, date):
   print title + ' by ' + author
   print 'Owned: ' + owned
@@ -21,7 +25,7 @@ def getInfo(title, author, owned, start, end, format, date):
   print 'Finished: ' + end
   print 'Format: ' + format
   print 'First Published: ' + date
-  print 'You read this in ' + str(readTime(start, end)) + ' days.'
+  print readTime(start, end)
   print
 def search(option, search):
   file.next()
