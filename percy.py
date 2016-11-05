@@ -17,7 +17,10 @@ def readTime(start, end):
     readingTime = endDate - startDate
     return 'You read this in ' + str(readingTime.days) + ' days.'
   except IndexError:
-    return 'You are currently reading this.'
+    if end == 'pending':
+      return 'You are currently reading this.'
+    else:
+      return 'You haven\'t read this yet.'
 def getInfo(title, author, owned, start, end, format, date):
   print title + ' by ' + author
   print 'Owned: ' + owned

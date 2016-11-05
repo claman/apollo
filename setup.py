@@ -10,7 +10,7 @@ with open('LICENSE') as f:
 
 setup(
   name='percival',
-  version='0.9.0',
+  version='0.8.0',
   description='Search and edit your Markdown reading list',
   long_description=readme,
   author='Alex Claman',
