@@ -1,7 +1,6 @@
 #!/usr/local/bin/python2.7
 import argparse
 import datetime
-import yaml
 file = open('example.txt', 'r') # change this to correspond to your list
 
 def getYear(date):
