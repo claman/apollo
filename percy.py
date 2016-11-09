@@ -1,22 +1,28 @@
-#!/usr/local/bin/python2.7
+#!/usr/bin/env python
 import argparse
 import datetime
 file = open('example.txt', 'r') # change this to correspond to your list
 
-def getYear(date):
-  slashDate = date.split('/')
-  year = slashDate[2]
-  return year
-def readTime(start, end):
-  try:
-    start = start.split('/')
-    end = end.split('/')
-    startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
-    endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
-    readingTime = endDate - startDate
-    return 'You read this in ' + str(readingTime.days) + ' days.'
-  except IndexError:
-    return 'Unread or currently reading'
+class Book:
+  def __init__(self, title, author, owned, start, end, physical, date):
+    self.title = title
+    self.author = author
+    self.owned = owned
+    self.start = start
+    self.end = end
+    self.physical = physical
+    self.date = date
+  def readTime(start, end):
+    try:
+      start = start.split('/')
+      end = end.split('/')
+      startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
+      endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
+      readingTime = endDate - startDate
+      return 'You read this in ' + str(readingTime.days) + ' days.'
+    except IndexError:
+      return 'Unread or current'
+
 def getInfo(title, author, owned, start, end, format, date):
   print title + ' by ' + author
   print 'Owned: ' + owned
