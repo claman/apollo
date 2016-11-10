@@ -24,10 +24,6 @@ class Book:
       return 'Unread or current'
   def returnAllInfo(self):
     return [self.title, self.author, self.owned, self.start, self.end, self.physical, self.date, self.readTime()]
-  def returnType(self):
-    return self.physical
-  def returnOwnedStatus(self):
-    return self.owned
 
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
@@ -39,13 +35,13 @@ def stats():
     entry = line.split('|')
     currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
     totalBooks += 1
-    if currentBook.returnType() == 'Paperback' or format == 'Hardcover':
+    if currentBook.physical == 'Paperback' or format == 'Hardcover':
       totalPhysical += 1
-    elif currentBook.returnType() == 'Ebook':
+    elif currentBook.physical == 'Ebook':
       totalEbooks += 1
-    if currentBook.returnOwnedStatus() == 'x':
+    if currentBook.owned == 'x':
       totalOwned += 1
-    elif currentBook.returnOwnedStatus() == 'o':
+    elif currentBook.owned == 'o':
       totalBorrowed += 1
     readStatus = currentBook.returnAllInfo()
     if readStatus[7] != 'Unread or current':
