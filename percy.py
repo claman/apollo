@@ -22,8 +22,12 @@ class Book:
       return 'You read this in ' + str(readingTime.days) + ' days.'
     except IndexError:
       return 'Unread or current'
-  def returnInfo(self):
+  def returnAllInfo(self):
     return [self.title, self.author, self.owned, self.start, self.end, self.physical, self.date, self.readTime()]
+  def returnType(self):
+    return self.physical
+  def returnOwnedStatus(self):
+    return self.owned
 
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
@@ -33,17 +37,18 @@ def stats():
   for line in file:
     line = line.strip('|\n')
     entry = line.split('|')
-    title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
+    currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
     totalBooks += 1
-    if format == 'Paperback' or format == 'Hardcover':
+    if currentBook.returnType() == 'Paperback' or format == 'Hardcover':
       totalPhysical += 1
-    elif format == 'Ebook':
+    elif currentBook.returnType() == 'Ebook':
       totalEbooks += 1
-    if owned == 'x':
+    if currentBook.returnOwnedStatus() == 'x':
       totalOwned += 1
-    elif owned == 'o':
+    elif currentBook.returnOwnedStatus() == 'o':
       totalBorrowed += 1
-    if start != '-' and end != '-':
+    readStatus = currentBook.returnAllInfo()
+    if readStatus[7] != 'Unread or current':
       totalRead += 1
   print 'You have ' + str(totalBooks) + ' books on your list; you have read ' + str(totalRead) + '.'
   print 'You own ' + str(totalOwned) + ' books: ' + str(totalPhysical) \
