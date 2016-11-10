@@ -12,49 +12,19 @@ class Book:
     self.end = end
     self.physical = physical
     self.date = date
-  def readTime(start, end):
+  def readTime(self):
     try:
-      start = start.split('/')
-      end = end.split('/')
+      start = self.start.split('/')
+      end = self.end.split('/')
       startDate = datetime.date(int(start[2]), int(start[0]), int(start[1]))
       endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
       readingTime = endDate - startDate
       return 'You read this in ' + str(readingTime.days) + ' days.'
     except IndexError:
       return 'Unread or current'
+  def returnInfo(self):
+    return [self.title, self.author, self.owned, self.start, self.end, self.physical, self.date, self.readTime()]
 
-def getInfo(title, author, owned, start, end, format, date):
-  print title + ' by ' + author
-  print 'Owned: ' + owned
-  print 'Started: ' + start
-  print 'Finished: ' + end
-  print 'Format: ' + format
-  print 'First Published: ' + date
-  print readTime(start, end)
-  print
-def search(option, search):
-  file.next()
-  file.next()
-  for line in file:
-    line = line.strip('|\n')
-    entry = line.split('|')
-    title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
-    if option == 't':
-      if search in title:
-        getInfo(title, author, owned, start, end, format, date)
-    elif option == 'y':
-      if start and end != '-':
-        if search == getYear(start) or search == getYear(end):
-          getInfo(title, author, owned, start, end, format, date)
-    elif option == 'a':
-      search = search.title()
-      if search in author:
-        getInfo(title, author, owned, start, end, format, date)
-    elif option == 'p':
-      if search == date:
-        getInfo(title, author, owned, start, end, format, date)
-    elif option == '--list':
-      getInfo(title, author, owned, start, end, format, date)
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
   totalRead, totalOwned, totalBorrowed = 0, 0, 0
@@ -79,6 +49,7 @@ def stats():
   print 'You own ' + str(totalOwned) + ' books: ' + str(totalPhysical) \
         + ' physical (paperback or hardcover) and ' + str(totalEbooks) + ' ebooks.'
   print 'You have borrowed ' + str(totalBorrowed) + ' books.'
+
 def addBook():
   append = open('example.txt', 'a') # change this to correspond to your list
   title = raw_input('Title: ')
@@ -91,6 +62,32 @@ def addBook():
   append.write('\n|'+str(title)+'|'+str(author)+'|'+str(owned)+'|'+str(start)+'|'+str(end)+'|'+str(b_format)+'|'+str(year)+'|')
   print 'Added '+str(title)+' by '+str(author)
   append.close()
+
+def search(option, search):
+  file.next()
+  file.next()
+  for line in file:
+    line = line.strip('|\n')
+    entry = line.split('|')
+    title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
+    if option == 't':
+      if search in title:
+        getInfo(title, author, owned, start, end, format, date)
+    elif option == 'y':
+      if start and end != '-':
+        if search == getYear(start) or search == getYear(end):
+          getInfo(title, author, owned, start, end, format, date)
+    elif option == 'a':
+      search = search.title()
+      if search in author:
+        getInfo(title, author, owned, start, end, format, date)
+    elif option == 'p':
+      if search == date:
+        getInfo(title, author, owned, start, end, format, date)
+    elif option == '--list':
+      getInfo(title, author, owned, start, end, format, date)
+
+
 
 parser = argparse.ArgumentParser(description='List books based on queries.')
 parser.add_argument('-a', help='Search by author')
