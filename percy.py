@@ -75,8 +75,6 @@ def search(option, search):
     elif option == '--list':
       getInfo(title, author, owned, start, end, format, date)
 
-
-
 parser = argparse.ArgumentParser(description='List books based on queries.')
 parser.add_argument('-a', help='Search by author')
 parser.add_argument('-p', help='Search by publication date')
