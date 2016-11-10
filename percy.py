@@ -55,19 +55,6 @@ def stats():
         + ' physical (paperback or hardcover) and ' + str(totalEbooks) + ' ebooks.'
   print 'You have borrowed ' + str(totalBorrowed) + ' books.'
 
-def addBook():
-  append = open('example.txt', 'a') # change this to correspond to your list
-  title = raw_input('Title: ')
-  author = raw_input('Author: ')
-  owned = raw_input('Owned (x/o): ')
-  start = raw_input('Date Started (ie 2/7/2014): ')
-  end = raw_input('Date Finished (ie 2/10/2014): ')
-  b_format = raw_input('Format: ')
-  year = raw_input('Year of Publication: ')
-  append.write('\n|'+str(title)+'|'+str(author)+'|'+str(owned)+'|'+str(start)+'|'+str(end)+'|'+str(b_format)+'|'+str(year)+'|')
-  print 'Added '+str(title)+' by '+str(author)
-  append.close()
-
 def search(option, search):
   file.next()
   file.next()
