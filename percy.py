@@ -22,6 +22,13 @@ class Book:
       return 'You read this in ' + str(readingTime.days) + ' days.'
     except IndexError:
       return 'Unread or current'
+  def returnReadingYears(self):
+    yearS = self.start.split('/')
+    yearE = self.end.split('/')
+    if len(yearS) and len(yearE) == 3:
+      return [yearS[2], yearE[2]]
+    else:
+      return []
   def returnAllInfo(self):
     return [self.title, self.author, self.owned, self.start, self.end, self.physical, self.date, self.readTime()]
   def returnFormatted(self):
@@ -72,7 +79,7 @@ def search(option, search):
         currentBook.returnFormatted()
     elif option == 'y':
       if currentBook.start and currentBook.end != '-':
-        if search == currentBook.start or search == currentBook.end:
+        if search in currentBook.returnReadingYears():
           currentBook.returnFormatted()
     elif option == 'a':
       if search in currentBook.author:
