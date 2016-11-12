@@ -24,6 +24,15 @@ class Book:
       return 'Unread or current'
   def returnAllInfo(self):
     return [self.title, self.author, self.owned, self.start, self.end, self.physical, self.date, self.readTime()]
+  def returnFormatted(self):
+    print self.title + ' by ' + self.author
+    print 'Owned: ' + self.owned
+    print 'Started: ' + self.start
+    print 'Finished: ' + self.end
+    print 'Format: ' + self.physical
+    print 'First Published: ' + self.date
+    print self.readTime()
+    print
 
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
@@ -57,23 +66,22 @@ def search(option, search):
   for line in file:
     line = line.strip('|\n')
     entry = line.split('|')
-    title, author, owned, start, end, format, date = entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6]
+    currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
     if option == 't':
-      if search in title:
-        getInfo(title, author, owned, start, end, format, date)
+      if search in currentBook.title:
+        currentBook.returnFormatted()
     elif option == 'y':
-      if start and end != '-':
-        if search == getYear(start) or search == getYear(end):
-          getInfo(title, author, owned, start, end, format, date)
+      if currentBook.start and currentBook.end != '-':
+        if search == currentBook.start or search == currentBook.end:
+          currentBook.returnFormatted()
     elif option == 'a':
-      search = search.title()
-      if search in author:
-        getInfo(title, author, owned, start, end, format, date)
+      if search in currentBook.author:
+        currentBook.returnFormatted()
     elif option == 'p':
-      if search == date:
-        getInfo(title, author, owned, start, end, format, date)
+      if search == currentBook.date:
+        currentBook.returnFormatted()
     elif option == '--list':
-      getInfo(title, author, owned, start, end, format, date)
+      currentBook.returnFormatted()
 
 parser = argparse.ArgumentParser(description='List books based on queries.')
 parser.add_argument('-a', help='Search by author')
