@@ -96,7 +96,6 @@ parser.add_argument('-p', help='Search by publication date')
 parser.add_argument('-t', help='Search by title')
 parser.add_argument('-y', help='Search by reading year')
 parser.add_argument('--stats', action='store_true', help='Show stats about list (no argument)')
-parser.add_argument('--add', action='store_true', help='Add book (no argument)')
 parser.add_argument('--list', action='store_true', help='List all books')
 args = parser.parse_args()
 if args.t:
@@ -109,8 +108,6 @@ elif args.p:
   search('p', args.p)
 elif args.stats:
   stats()
-elif args.add:
-  addBook()
 elif args.list:
   search('--list', '')
 else:
