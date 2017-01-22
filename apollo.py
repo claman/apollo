@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import argparse
 import datetime
-file = open('example.txt', 'r') # change this to correspond to your list
 
 class Book:
   def __init__(self, title, author, owned, start, end, physical, date):
@@ -90,8 +89,8 @@ def search(option, search):
     elif option == '--list':
       currentBook.returnFormatted()
 
-parser = argparse.ArgumentParser()
-subparsers = parser.add_subparsers(help='sub-command help')
+parser = argparse.ArgumentParser(description='Use \'book\' to query reading list.')
+subparsers = parser.add_subparsers()
 
 parser_books = subparsers.add_parser('book', help='List books based on queries.')
 parser_books.add_argument('-a', help='Search by author')
@@ -101,21 +100,28 @@ parser_books.add_argument('-y', help='Search by reading year')
 parser_books.add_argument('--stats', action='store_true', help='Show stats about list (no argument)')
 parser_books.add_argument('--list', action='store_true', help='List all books')
 
+parser_movies = subparsers.add_parser('movie', help='List movies based on queries')
+parser_movies.add_argument('-t', help='Search by title')
+parser_movies.add_argument('-y', help='Search by release year')
+parser_movies.add_argument('-d', help='Search by watch date')
+parser_movies.add_argument('-r', help='Search by rating')
+
 args = parser.parse_args()
 
-if args.t:
-  search('t', args.t)
-elif args.y:
-  search('y', args.y)
-elif args.a:
-  search('a', args.a)
-elif args.p:
-  search('p', args.p)
-elif args.stats:
-  stats()
-elif args.list:
-  search('--list', '')
-else:
-  print 'Try running again with \'-h\''
-
-file.close()
+if __name__ == '__main__':
+  file = open('example.txt', 'r') # change this to correspond to your list
+  if args.t:
+    search('t', args.t)
+  elif args.y:
+    search('y', args.y)
+  elif args.a:
+    search('a', args.a)
+  elif args.p:
+    search('p', args.p)
+  elif args.stats:
+    stats()
+  elif args.list:
+    search('--list', '')
+  else:
+    print 'Try running again with \'-h\''
+  file.close()
