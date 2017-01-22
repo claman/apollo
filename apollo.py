@@ -43,9 +43,9 @@ class Book:
 def stats():
   totalBooks, totalPhysical, totalEbooks = 0, 0, 0
   totalRead, totalOwned, totalBorrowed = 0, 0, 0
-  file.next()
-  file.next()
-  for line in file:
+  books_list.next()
+  books_list.next()
+  for line in books_list:
     line = line.strip('|\n')
     entry = line.split('|')
     currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
@@ -67,9 +67,9 @@ def stats():
   print 'You have borrowed ' + str(totalBorrowed) + ' books.'
 
 def search(option, search):
-  file.next()
-  file.next()
-  for line in file:
+  books_list.next()
+  books_list.next()
+  for line in books_list:
     line = line.strip('|\n')
     entry = line.split('|')
     currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
@@ -89,7 +89,7 @@ def search(option, search):
     elif option == '--list':
       currentBook.returnFormatted()
 
-parser = argparse.ArgumentParser(description='Use \'book\' to query reading list.')
+parser = argparse.ArgumentParser(description='Use \'book\' to query reading list, or \'movie\' to query watch list.')
 subparsers = parser.add_subparsers()
 
 parser_books = subparsers.add_parser('book', help='List books based on queries.')
@@ -109,7 +109,7 @@ parser_movies.add_argument('-r', help='Search by rating')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-  file = open('example.txt', 'r') # change this to correspond to your list
+  books_list = open('example.txt', 'r') # change this to correspond to your list
   if args.t:
     search('t', args.t)
   elif args.y:
@@ -124,4 +124,4 @@ if __name__ == '__main__':
     search('--list', '')
   else:
     print 'Try running again with \'-h\''
-  file.close()
+  books_list.close()
