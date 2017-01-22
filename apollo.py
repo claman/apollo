@@ -19,8 +19,8 @@ class Book:
       endDate = datetime.date(int(end[2]), int(end[0]), int(end[1]))
       readingTime = endDate - startDate
       return 'You read this in ' + str(readingTime.days) + ' days.'
-    except IndexError:
-      return 'Unread or current'
+    except (IndexError, ValueError):
+      return 'Unread, current, or unknown'
   def returnReadingYears(self):
     yearS = self.start.split('/')
     yearE = self.end.split('/')
