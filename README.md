@@ -1,8 +1,10 @@
-## Percival
+## Apollo
 
-Percival is a little script I've hacked together to search through a Markdown list of books.
+Percival is a little script I've hacked together to search through a Markdown list of books (and soon: movies).
 
-Given a markdown table formatted thusly:
+#### Reading List
+
+Given a book list in Markdown table form:
 
     |Title|Author|Owned|Date Begun|Date Finished|Medium|First Published|
     |:----|:-----|:----|:---------|:------------|:-----|:--------------|
@@ -21,3 +23,7 @@ You can search by author, publication date, title, and the year in which you rea
   - -y YEAR, (Search by reading year)
   - --stats (Get stats)
   - --list (List all books)
+
+#### Movie Watch List
+
+Coming soon.
