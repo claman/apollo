@@ -66,30 +66,28 @@ def stats():
         + ' physical (paperback or hardcover) and ' + str(totalEbooks) + ' ebooks.'
   print 'You have borrowed ' + str(totalBorrowed) + ' books.'
 
-def search(option, search):
+def search(args):
   books_list.next()
   books_list.next()
   for line in books_list:
     line = line.strip('|\n')
     entry = line.split('|')
     currentBook = Book(entry[0], entry[1], entry[2], entry[3], entry[4], entry[5], entry[6])
-    if option == 't':
-      if search in currentBook.title:
+    if args.t:
+      if args.t in currentBook.title:
         currentBook.returnFormatted()
-    elif option == 'y':
-      if currentBook.start and currentBook.end != '-':
-        if search in currentBook.returnReadingYears():
-          currentBook.returnFormatted()
-    elif option == 'a':
-      if search in currentBook.author:
+    elif args.y and currentBook.start and currentBook.end != '-':
+      if args.y in currentBook.returnReadingYears():
         currentBook.returnFormatted()
-    elif option == 'p':
-      if search == currentBook.date:
-        currentBook.returnFormatted()
-    elif option == '--list':
+    elif args.a and args.a in currentBook.author:
+      currentBook.returnFormatted()
+    elif args.p and args.p == currentBook.date:
+      currentBook.returnFormatted()
+    elif args.list:
       currentBook.returnFormatted()
 
 parser = argparse.ArgumentParser(description='Use \'book\' to query reading list, or \'movie\' to query watch list.')
+parser.add_argument('--stats', action='store_true', help='Show stats about list (no argument)')
 subparsers = parser.add_subparsers()
 
 parser_books = subparsers.add_parser('book', help='List books based on queries.')
@@ -97,8 +95,8 @@ parser_books.add_argument('-a', help='Search by author')
 parser_books.add_argument('-p', help='Search by publication date')
 parser_books.add_argument('-t', help='Search by title')
 parser_books.add_argument('-y', help='Search by reading year')
-parser_books.add_argument('--stats', action='store_true', help='Show stats about list (no argument)')
 parser_books.add_argument('--list', action='store_true', help='List all books')
+parser_books.set_defaults(func=search)
 
 parser_movies = subparsers.add_parser('movie', help='List movies based on queries')
 parser_movies.add_argument('-t', help='Search by title')
@@ -110,18 +108,19 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
   books_list = open('example.txt', 'r') # change this to correspond to your list
-  if args.t:
-    search('t', args.t)
-  elif args.y:
-    search('y', args.y)
-  elif args.a:
-    search('a', args.a)
-  elif args.p:
-    search('p', args.p)
-  elif args.stats:
-    stats()
-  elif args.list:
-    search('--list', '')
-  else:
-    print 'Try running again with \'-h\''
+  args.func(args)
+#  if args.t:
+#    search('t', args.t)
+#  elif args.y:
+#    search('y', args.y)
+#  elif args.a:
+#    search('a', args.a)
+#  elif args.p:
+#    search('p', args.p)
+#  elif args.stats:
+#    stats()
+#  elif args.list:
+#    search('--list', '')
+#  else:
+#    print 'Try running again with \'-h\''
   books_list.close()
